@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Fichier de configuration Maven (Project Object Model) pour le projet TP7.
+    Définit les dépendances, les plugins et les configurations de construction du projet.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- Version du modèle POM utilisée par Maven -->
+	<modelVersion>4.0.0</modelVersion>
+	<!-- Configuration parente Spring Boot qui fournit des valeurs par défaut et des configurations communes -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.7</version>  <!-- Version de Spring Boot utilisée -->
+		<relativePath/> <!-- Cherche le parent dans le dépôt Maven -->
+	</parent>
+	<!-- Coordonnées du projet -->
+	<groupId>ma.ws.jaxrs</groupId>  <!-- Identifiant du groupe du projet -->
+	<artifactId>TP7</artifactId>    <!-- Identifiant de l'artefact du projet -->
+	<version>0.0.1-SNAPSHOT</version>  <!-- Version du projet -->
+	<name>TP7</name>  <!-- Nom affiché du projet -->
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<!-- Propriétés du projet -->
+	<properties>
+		<java.version>17</java.version>  <!-- Version de Java requise -->
+	</properties>
+	<!-- Dépendances du projet -->
+	<dependencies>
+		<!-- Spring Data JPA pour la persistance des données -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- Jersey pour implémenter JAX-RS (API REST) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jersey</artifactId>
+		</dependency>
+		<!-- Spring Web pour les applications web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Outils de développement Spring Boot (redémarrage automatique, etc.) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>  <!-- Disponible uniquement au runtime, pas pendant la compilation -->
+			<optional>true</optional>  <!-- Ne sera pas hérité par les projets qui dépendent de celui-ci -->
+		</dependency>
+		<!-- Base de données H2 en mémoire -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>  <!-- Nécessaire uniquement au runtime -->
+		</dependency>
+		<!-- Lombok pour réduire le code boilerplate (getters, setters, etc.) -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>  <!-- Ne sera pas hérité par les projets qui dépendent de celui-ci -->
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- Configuration de la construction du projet -->
+	<build>
+		<!-- Plugins Maven utilisés pour la construction -->
+		<plugins>
+			<!-- Configuration du compilateur Java -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<!-- Configuration des processeurs d'annotations (comme Lombok) -->
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<!-- Plugin Spring Boot Maven pour l'empaquetage de l'application -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<!-- Exclut Lombok du fichier JAR final pour réduire la taille -->
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
